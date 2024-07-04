@@ -10,6 +10,8 @@ from result import Result
 from sparsing.sparsing_algorithms import sparsing_list
 import time
 
+from email_sender import send_email
+
 start_time = time.time()
 
 warnings.filterwarnings('ignore')
@@ -47,6 +49,13 @@ if __name__ == '__main__':
                     result = [result.as_dict()]
                     df = pd.DataFrame(result)
                     df.to_csv(f'additional_files/{dataset.name}_results.csv', index=False)
+
+                    recipients = ['piotr.bledowski.77@gmail.com']
+                    subject = f'{dataset.name} results'
+                    body = f'The {dataset.name} results at run_num=100 are here!'
+                    attachment = f'additional_files/{dataset.name}_results.csv'
+
+                    send_email(recipients, subject, body, attachment)
 
     results_df = pd.DataFrame(results)
     results_df.to_csv('additional_files/results.csv', index=False)
