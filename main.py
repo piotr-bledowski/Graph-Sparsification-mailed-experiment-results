@@ -28,7 +28,7 @@ def get_model(model_type, dataset):
 
 
 if __name__ == '__main__':
-    run_num = 10
+    run_num = 100
     results = []
     for dataset in datasets:
         dataset_results = []

@@ -55,7 +55,7 @@ sparsing_list = [
     Jaccard,
     # CommonNeighbor,
     PreferentialAttachment,
-    AdamicAdar,
+    #AdamicAdar,
     AdjustedRand,
     # Katz,
     LDS,
