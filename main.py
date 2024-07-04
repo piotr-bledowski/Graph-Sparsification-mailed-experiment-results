@@ -28,9 +28,10 @@ def get_model(model_type, dataset):
 
 
 if __name__ == '__main__':
-    run_num = 100
+    run_num = 10
     results = []
     for dataset in datasets:
+        dataset_results = []
         for model_data in models:
             for sparsing in sparsing_list:
                 sparsing_name = sparsing.__name__ if sparsing is not None else 'NoSparsification'
@@ -46,16 +47,16 @@ if __name__ == '__main__':
                                     removed_percentage)
                     print(result)
                     results.append(result.as_dict())
-                    result = [result.as_dict()]
-                    df = pd.DataFrame(result)
-                    df.to_csv(f'additional_files/{dataset.name}_results.csv', index=False)
+                    dataset_results.append(result.as_dict())
+        df = pd.DataFrame(dataset_results)
+        df.to_csv(f'additional_files/{dataset.name}_results.csv', index=False)
 
-                    recipients = ['piotr.bledowski.77@gmail.com']
-                    subject = f'{dataset.name} results'
-                    body = f'The {dataset.name} results at run_num=100 are here!'
-                    attachment = f'additional_files/{dataset.name}_results.csv'
+        recipients = ['piotr.bledowski.77@gmail.com']
+        subject = f'{dataset.name} results'
+        body = f'The {dataset.name} results at run_num=100 are here!'
+        attachment = f'additional_files/{dataset.name}_results.csv'
 
-                    send_email(recipients, subject, body, attachment)
+        send_email(recipients, subject, body, attachment)
 
     results_df = pd.DataFrame(results)
     results_df.to_csv('additional_files/results.csv', index=False)
