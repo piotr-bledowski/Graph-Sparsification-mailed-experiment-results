@@ -26,7 +26,7 @@ def get_model(model_type, dataset):
 
 
 if __name__ == '__main__':
-    run_num = 10
+    run_num = 100
     results = []
     for dataset in datasets:
         for model_data in models:
@@ -44,6 +44,9 @@ if __name__ == '__main__':
                                     removed_percentage)
                     print(result)
                     results.append(result.as_dict())
+                    result = [result.as_dict()]
+                    df = pd.DataFrame(result)
+                    df.to_csv(f'additional_files/{dataset.name}_results.csv', index=False)
 
     results_df = pd.DataFrame(results)
     results_df.to_csv('additional_files/results.csv', index=False)
